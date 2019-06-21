@@ -28,16 +28,15 @@ export const SUCCESS = 'SUCCESS';
 
 // Get all from smurfs
 export const getSmurfs = () => dispatch => {
-	dispatch({ type: FETCHING, payload: true });
+	dispatch({ type: FETCHING, payload: { fetchingSmurfs: true } });
 
 	axios
 		.get(`${BASE_URL}/smurfs`)
 		.then(res => {
-			dispatch({ type: FETCHING, payload: false });
-			dispatch({ type: SUCCESS, payload: true });
+			dispatch({ type: SUCCESS, payload: { fetchingSmurfs: false } });
 			dispatch({ type: ADD_SMURFS, payload: res.data });
 		})
 		.catch(err => {
-			dispatch({ type: FAILURE, payload: err.message });
+			dispatch({ type: FAILURE, payload: { error: err.res.message, fetchingSmurfs: false } });
 		});
 };
