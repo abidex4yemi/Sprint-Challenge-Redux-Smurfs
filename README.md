@@ -43,7 +43,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [X] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
 
-*`redux-thunk` Redux is action creator or dispatchers are synchronous and only allows action  creators to be an object. `redux-thunk` allows us to perform asynchronous request and also return action as a function*
+*`redux-thunk` Redux is action creator or dispatchers are synchronous and only allows action  creators to be an object. `redux-thunk` is a middleware that that intercept between action creators and the reducers, allows us to perform asynchronous request and also return action as a function*
 
 ## Project Set Up
 
