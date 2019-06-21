@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { SmurfsList } from '../../components/Smurfs';
+import { SmurfFormView } from './index';
 import { connect } from 'react-redux';
-import { getSmurfs, deleteSmurf, updateSmurf } from '../../redux/actions';
+import { getSmurfs, deleteSmurf } from '../../redux/actions';
 
 const SmurfsListView = props => {
-	const { getSmurfs, smurfs, fetchingSmurfs, deleteSmurf, updateSmurf } = props;
+	const { getSmurfs, smurfs, fetchingSmurfs, deleteSmurf } = props;
 
 	useEffect(getSmurfs, []);
 
@@ -14,7 +15,12 @@ const SmurfsListView = props => {
 	}
 
 	if (smurfs.length > 0) {
-		return <SmurfsList smurfs={smurfs} deleteSmurf={deleteSmurf} updateSmurf={updateSmurf} />;
+		return (
+			<div>
+				<SmurfsList smurfs={smurfs} deleteSmurf={deleteSmurf} />
+				<SmurfFormView />
+			</div>
+		);
 	}
 
 	return (
@@ -27,8 +33,7 @@ const SmurfsListView = props => {
 SmurfsListView.propTypes = {
 	smurfs: PropTypes.array.isRequired,
 	fetchingSmurfs: PropTypes.bool.isRequired,
-	deleteSmurf: PropTypes.func.isRequired,
-	updateSmurf: PropTypes.func.isRequired
+	deleteSmurf: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -38,4 +43,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { getSmurfs, deleteSmurf, updateSmurf })(SmurfsListView);
+export default connect(mapStateToProps, { getSmurfs, deleteSmurf })(SmurfsListView);

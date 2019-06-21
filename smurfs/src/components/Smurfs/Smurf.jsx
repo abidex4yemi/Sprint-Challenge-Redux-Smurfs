@@ -1,16 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button } from '../Form';
 
-export const Smurf = ({ smurf, deleteSmurf, updateSmurf }) => {
+export const Smurf = ({ smurf, deleteSmurf }) => {
 	const { name, age, height, id } = smurf;
 
 	const handleDelete = () => {
 		deleteSmurf(id);
-	};
-
-	const handleUpdate = () => {
-		updateSmurf(id);
 	};
 
 	return (
@@ -24,7 +21,7 @@ export const Smurf = ({ smurf, deleteSmurf, updateSmurf }) => {
 			</div>
 			<div>
 				<Button buttonText="delete" onclick={handleDelete} type="button" />
-				<Button buttonText="Update" onclick={handleUpdate} type="button" />
+				<Link to={`/smurfs/${id}/edit`}>Edit</Link>
 			</div>
 		</div>
 	);

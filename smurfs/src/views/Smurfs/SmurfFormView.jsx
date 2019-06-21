@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addSmurf } from '../../redux/actions';
+import { addSmurf, updateSmurf } from '../../redux/actions';
 import { Input, Button } from '../../components/Form';
 
 const SmurfFormView = props => {
-	const { addSmurf } = props;
+	const { addSmurf, smurfs, updateSmurf } = props;
 	const [form, setFormValues] = useState({
 		name: '',
 		age: '',
 		height: '',
 		errors: {}
 	});
+
+	useEffect(() => {
+		populateForm();
+	}, []);
+
+	const populateForm = () => {
+		if (props.id) {
+			const smurfID = props.id;
+			const smurf = smurfs.filter(smurf => `${smurf.id}` === `${smurfID}`);
+			const values = smurf[0];
+			setFormValues({
+				...form,
+				name: values.name,
+				age: values.age,
+				height: values.height
+			});
+		}
+	};
 
 	const inputChange = (field, value) => {
 		setFormValues({
@@ -33,6 +51,25 @@ const SmurfFormView = props => {
 				height: '',
 				errors: {}
 			});
+		});
+	};
+
+	const handleUpdateSmurf = () => {
+		const ID = props.id;
+		const updatedSmurf = {
+			name: form.name,
+			height: form.height,
+			age: parseInt(form.age, 10)
+		};
+
+		updateSmurf(ID, updatedSmurf).then(() => {
+			setFormValues({
+				name: '',
+				age: '',
+				height: '',
+				errors: {}
+			});
+			props.history.push('/');
 		});
 	};
 
@@ -64,9 +101,19 @@ const SmurfFormView = props => {
 				type="text"
 				error={form.errors.height}
 			/>
-			<Button buttonText="Add Smurf" onclick={handleAddSmurf} type="button" />
+			{props.id ? (
+				<Button buttonText="Update Smurf" onclick={handleUpdateSmurf} type="button" />
+			) : (
+				<Button buttonText="Add Smurf" onclick={handleAddSmurf} type="button" />
+			)}
 		</form>
 	);
 };
 
-export default connect(null, { addSmurf })(SmurfFormView);
+const mapStateToProps = state => {
+	return {
+		smurfs: state.smurfReducer.smurfs
+	};
+};
+
+export default connect(mapStateToProps, { addSmurf, updateSmurf })(SmurfFormView);
