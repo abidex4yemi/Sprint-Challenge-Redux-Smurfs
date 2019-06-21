@@ -4,9 +4,9 @@ import uuid from 'uuid';
 import { Smurf } from './Smurf';
 
 export const SmurfsList = props => {
-	const { smurfs } = props;
+	const { smurfs, deleteSmurf } = props;
 
-	return <section>{smurfs.map(smurf => <Smurf key={uuid()} smurf={smurf} />)}</section>;
+	return <section>{smurfs.map(smurf => <Smurf key={uuid()} smurf={smurf} deleteSmurf={deleteSmurf} />)}</section>;
 };
 
 SmurfsList.propTypes = {

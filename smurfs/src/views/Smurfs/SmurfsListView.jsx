@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { SmurfsList } from '../../components/Smurfs';
 import { connect } from 'react-redux';
-import { getSmurfs } from '../../redux/actions';
+import { getSmurfs, deleteSmurf } from '../../redux/actions';
 
 const SmurfsListView = props => {
-	const { getSmurfs, smurfs, fetchingSmurfs } = props;
+	const { getSmurfs, smurfs, fetchingSmurfs, deleteSmurf } = props;
 
 	useEffect(getSmurfs, []);
 
@@ -14,7 +14,7 @@ const SmurfsListView = props => {
 	}
 
 	if (smurfs.length > 0) {
-		return <SmurfsList smurfs={smurfs} />;
+		return <SmurfsList smurfs={smurfs} deleteSmurf={deleteSmurf} />;
 	}
 
 	return (
@@ -26,7 +26,8 @@ const SmurfsListView = props => {
 
 SmurfsListView.propTypes = {
 	smurfs: PropTypes.array.isRequired,
-	fetchingSmurfs: PropTypes.bool.isRequired
+	fetchingSmurfs: PropTypes.bool.isRequired,
+	deleteSmurf: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -36,4 +37,4 @@ const mapStateToProps = state => {
 	};
 };
 
-export default connect(mapStateToProps, { getSmurfs })(SmurfsListView);
+export default connect(mapStateToProps, { getSmurfs, deleteSmurf })(SmurfsListView);

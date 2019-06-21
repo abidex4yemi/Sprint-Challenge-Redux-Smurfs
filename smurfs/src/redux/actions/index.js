@@ -55,3 +55,18 @@ export const addSmurf = newSmurf => dispatch => {
 			dispatch({ type: FAILURE, payload: { error: err.message, addingSmurf: false } });
 		});
 };
+
+// Delete smurf
+export const deleteSmurf = id => dispatch => {
+	dispatch({ type: DELETING, payload: { deletingSmurf: true } });
+
+	return axios
+		.delete(`${BASE_URL}/smurfs/${id}`)
+		.then(res => {
+			dispatch({ type: SUCCESS, payload: { deletingSmurf: false } });
+			dispatch({ type: ADD_SMURFS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: FAILURE, payload: { error: err.message, deletingSmurf: false } });
+		});
+};
