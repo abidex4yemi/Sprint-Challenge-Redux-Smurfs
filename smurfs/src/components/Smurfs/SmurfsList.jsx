@@ -9,7 +9,7 @@ export const SmurfsList = props => {
 	return <section>{smurfs.map(smurf => <Smurf key={uuid()} smurf={smurf} />)}</section>;
 };
 
-smurfs.propTypes = {
+SmurfsList.propTypes = {
 	smurfs: PropTypes.arrayOf(
 		PropTypes.shape({
 			name: PropTypes.string.isRequired,

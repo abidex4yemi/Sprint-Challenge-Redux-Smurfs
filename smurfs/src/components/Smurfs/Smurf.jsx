@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Smurf = props => {
-	const { name, age, height } = props;
+export const Smurf = ({ smurf }) => {
+	const { name, age, height } = smurf;
 
 	return (
 		<div>
@@ -18,7 +18,5 @@ export const Smurf = props => {
 };
 
 Smurf.propTypes = {
-	name: PropTypes.string.isRequired,
-	age: PropTypes.number.isRequired,
-	height: PropTypes.string.toString
+	smurf: PropTypes.object
 };
