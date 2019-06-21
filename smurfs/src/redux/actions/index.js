@@ -70,3 +70,7 @@ export const deleteSmurf = id => dispatch => {
 			dispatch({ type: FAILURE, payload: { error: err.message, deletingSmurf: false } });
 		});
 };
+
+export const updateSmurf = id => dispatch => {
+	console.log(id);
+};
