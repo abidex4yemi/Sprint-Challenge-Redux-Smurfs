@@ -1,4 +1,11 @@
+import axios from 'axios';
+
+// Set default endpoint url
+const BASE_URL = 'http://localhost:3333';
+
+// Declare action types
 export const ADD_SMURF = 'ADD_SMURF';
+export const ADD_SMURFS = 'ADD_SMURFS';
 export const GET_SMURF = 'GET_SMURF';
 export const UPDATE_SMURF = 'UPDATE_SMURF';
 export const DELETE_SMURF = 'DELETE_SMURF';
@@ -18,3 +25,19 @@ export const SUCCESS = 'SUCCESS';
    U - updateSmurf
    D - deleteSmurf
 */
+
+// Get all from smurfs
+export const getSmurfs = () => dispatch => {
+	dispatch({ type: FETCHING, payload: true });
+
+	axios
+		.get(`${BASE_URL}/smurfs`)
+		.then(res => {
+			dispatch({ type: FETCHING, payload: false });
+			dispatch({ type: SUCCESS, payload: true });
+			dispatch({ type: ADD_SMURFS, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: FAILURE, payload: err.message });
+		});
+};
