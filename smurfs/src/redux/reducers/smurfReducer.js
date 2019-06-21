@@ -16,15 +16,20 @@ export const smurfReducer = (state = initialState, action) => {
 				...state,
 				...action.payload
 			};
+		case ADD_SMURFS:
+			return {
+				...state,
+				smurfs: action.payload
+			};
 		case SUCCESS:
 			return {
 				...state,
 				...action.payload
 			};
-		case ADD_SMURFS:
+		case FAILURE:
 			return {
 				...state,
-				smurfs: action.payload
+				...action.payload
 			};
 		default:
 			return state;
