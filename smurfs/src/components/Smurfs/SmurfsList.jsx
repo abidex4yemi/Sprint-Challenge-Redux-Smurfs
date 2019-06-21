@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import { Smurf } from './Smurf';
@@ -6,7 +7,11 @@ import { Smurf } from './Smurf';
 export const SmurfsList = props => {
 	const { smurfs, deleteSmurf } = props;
 
-	return <section>{smurfs.map(smurf => <Smurf key={uuid()} smurf={smurf} deleteSmurf={deleteSmurf} />)}</section>;
+	return (
+		<StyledSmurfsList>
+			{smurfs.map(smurf => <Smurf key={uuid()} smurf={smurf} deleteSmurf={deleteSmurf} />)}
+		</StyledSmurfsList>
+	);
 };
 
 SmurfsList.propTypes = {
@@ -19,3 +24,8 @@ SmurfsList.propTypes = {
 		})
 	)
 };
+
+const StyledSmurfsList = styled.section`
+	display: flex;
+	justify-content: space-between;
+`;

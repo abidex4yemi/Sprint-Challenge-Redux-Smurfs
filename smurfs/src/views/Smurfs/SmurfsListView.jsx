@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { SmurfsList } from '../../components/Smurfs';
 import { SmurfFormView } from './index';
@@ -16,10 +17,10 @@ const SmurfsListView = props => {
 
 	if (smurfs.length > 0) {
 		return (
-			<div>
+			<StyledContent>
 				<SmurfsList smurfs={smurfs} deleteSmurf={deleteSmurf} />
 				<SmurfFormView />
-			</div>
+			</StyledContent>
 		);
 	}
 
@@ -44,3 +45,10 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { getSmurfs, deleteSmurf })(SmurfsListView);
+
+const StyledContent = styled.div`
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.8rem;
+	padding-top: 100px;
+`;
