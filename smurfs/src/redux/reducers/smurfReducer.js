@@ -1,4 +1,4 @@
-import { ADD_SMURFS, FETCHING, FAILURE, SUCCESS } from '../actions';
+import { ADD_SMURFS, FETCHING, FAILURE, SUCCESS, ADD_SMURF } from '../actions';
 
 const initialState = {
 	smurfs: [],
@@ -15,6 +15,11 @@ export const smurfReducer = (state = initialState, action) => {
 			return {
 				...state,
 				...action.payload
+			};
+		case ADD_SMURF:
+			return {
+				...state,
+				smurfs: action.payload
 			};
 		case ADD_SMURFS:
 			return {

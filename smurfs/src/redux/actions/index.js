@@ -37,6 +37,21 @@ export const getSmurfs = () => dispatch => {
 			dispatch({ type: ADD_SMURFS, payload: res.data });
 		})
 		.catch(err => {
-			dispatch({ type: FAILURE, payload: { error: err.res.message, fetchingSmurfs: false } });
+			dispatch({ type: FAILURE, payload: { error: err.message, fetchingSmurfs: false } });
+		});
+};
+
+// Add smurf
+export const addSmurf = newSmurf => dispatch => {
+	dispatch({ type: CREATING, payload: { addingSmurf: true } });
+
+	return axios
+		.post(`${BASE_URL}/smurfs`, newSmurf)
+		.then(res => {
+			dispatch({ type: SUCCESS, payload: { addingSmurf: false } });
+			dispatch({ type: ADD_SMURF, payload: res.data });
+		})
+		.catch(err => {
+			dispatch({ type: FAILURE, payload: { error: err.message, addingSmurf: false } });
 		});
 };
